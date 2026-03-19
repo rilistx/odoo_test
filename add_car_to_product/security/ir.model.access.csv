@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_engine_volume_public,engine.volume.public,model_engine_volume,base.group_public,1,0,0,0
+access_engine_volume_portal,engine.volume.portal,model_engine_volume,base.group_portal,1,0,0,0
+access_engine_volume_user,engine.volume.user,model_engine_volume,base.group_user,1,1,1,1

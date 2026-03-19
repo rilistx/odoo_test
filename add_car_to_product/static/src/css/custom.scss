@@ -1,0 +1,22 @@
+.o_content {
+  div {
+    table {
+      thead {
+        max-height: 1px;
+        tr {
+          th {
+            text-align: center !important;
+          }
+        }
+      }
+
+      tbody {
+        tr {
+          td {
+            text-align: center !important;
+          }
+        }
+      }
+    }
+  }
+}

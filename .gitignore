@@ -1,0 +1,15 @@
+# pycharm
+.idea/
+.DS_Store
+
+# conf
+*.conf
+
+# logs
+*.log
+
+# byte-compiled
+__pycache__/
+*.pyc
+*.pyo
+*.pyd

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="test_task_hide_standard_filters" inherit_id="website_sale.products" priority="20">
+        <xpath expr="//aside[@id='products_grid_before']" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
+    <template id="test_task_expand_product_grid" inherit_id="website_sale.products" priority="21">
+        <xpath expr="//div[@id='products_grid']" position="attributes">
+            <attribute name="class">col-lg-12</attribute>
+        </xpath>
+    </template>
+
+    <template id="test_task_hide_categories_filmstrip" inherit_id="website_sale.filmstrip_categories">
+        <xpath expr="//div[hasclass('o_wsale_filmstip_container')]" position="attributes">
+            <attribute name="class">d-none</attribute>
+        </xpath>
+    </template>
+
+    <template id="test_task_autoparts_search" inherit_id="website_sale.products">
+        <xpath expr="//div[hasclass('o_wsale_products_main_row')]" position="before">
+            <div class="container mb-4">
+                <h2 class="fw-bold mb-3">Уточніть автомобіль:</h2>
+
+                <form method="get" action="/shop" class="row g-2 autoparts_filter_form">
+                    <div class="col-md-3">
+                        <select name="brand_id" class="form-select">
+                            <option value="">Марка</option>
+                            <t t-foreach="brands" t-as="b">
+                                <option t-att-value="b.id" t-att-selected="str(b.id) == request.params.get('brand_id')">
+                                    <t t-esc="b.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-3">
+                        <select name="model_id" class="form-select" t-att-data-selected-id="request.params.get('model_id')">
+                            <option value="">Модель</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select name="year" class="form-select">
+                            <option value="">Рік</option>
+                            <t t-foreach="years" t-as="y">
+                                <option t-att-value="y" t-att-selected="str(y) == request.params.get('year')">
+                                    <t t-esc="y"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <select name="volume_id" class="form-select">
+                            <option value="">Об'єм</option>
+                            <t t-foreach="volumes" t-as="v">
+                                <option t-att-value="v.id" t-att-selected="str(v.id) == request.params.get('volume_id')">
+                                    <t t-esc="v.name"/>
+                                </option>
+                            </t>
+                        </select>
+                    </div>
+
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-danger w-100">Пошук</button>
+                    </div>
+                </form>
+            </div>
+        </xpath>
+    </template>
+</odoo>

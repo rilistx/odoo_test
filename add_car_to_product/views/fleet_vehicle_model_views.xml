@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="test_task_fleet_vehicle_model_form_swap" model="ir.ui.view">
+        <field name="name">test.task.fleet.vehicle.model.form.swap</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='oe_title']" position="replace">
+                <div class="oe_title">
+                    <label for="brand_id"/>
+                    <h1>
+                        <field name="brand_id" placeholder="e.g. Tesla"/>
+                    </h1>
+                    <label for="name"/>
+                    <h2>
+                        <field name="name" placeholder="e.g. Model S"/>
+                    </h2>
+                </div>
+            </xpath>
+
+            <xpath expr="//form/sheet/group/group/field[@name='active']" position="after">
+                <field name="model_type"/>
+                <label for="model_year_from" string="Years"/>
+                <div class="o_row d-flex align-items-center">
+                    <field name="model_year_from" widget="char" class="oe_inline m-0" style="width: 40px !important; flex: none !important;"/>
+                    <span class="mx-1">-</span>
+                    <field name="model_year_to" widget="char" class="oe_inline m-0" style="width: 40px !important; flex: none !important;"/>
+                </div>
+            </xpath>
+
+            <xpath expr="//page[@name='information']/group[1]" position="replace">
+                <group>
+                    <group>
+                        <group string="Model" invisible="vehicle_type != 'car'">
+                            <field name="seats"/>
+                            <field name="doors"/>
+                            <field name="color"/>
+                            <field name="model_year"/>
+                            <field name="trailer_hook"/>
+                            <field name="ovoko_car_id"/>
+                        </group>
+                        <group id="vehicle_information" string="Vehicle Information" invisible="vehicle_type != 'bike'">
+                            <field name="electric_assistance"/>
+                        </group>
+                    </group>
+                    <group string="Engine" invisible="vehicle_type != 'car'">
+                        <group>
+                            <field name="volume_id"/>
+                            <field name="default_fuel_type" required="1"/>
+                            <field name="transmission"/>
+                            <label for="power"/>
+                            <div class="o_row">
+                                <field name="power"/><span>kW</span>
+                            </div>
+                            <label for="default_co2"/>
+                            <div class="o_row" name="default_co2">
+                                <field name="default_co2"/><span>g/km</span>
+                            </div>
+                            <field name="co2_standard"/>
+                            <field name="horsepower"/>
+                            <field name="horsepower_tax"/>
+                        </group>
+                    </group>
+                </group>
+            </xpath>
+
+            <xpath expr="//page[@name='information']/group[2]" position="replace"/>
+        </field>
+    </record>
+
+    <record id="test_task_fleet_vehicle_model_tree" model="ir.ui.view">
+        <field name="name">test.task.fleet.vehicle.model.tree</field>
+        <field name="model">fleet.vehicle.model</field>
+        <field name="inherit_id" ref="fleet.fleet_vehicle_model_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vehicle_count']" position="replace"/>
+
+            <xpath expr="//field[@name='category_id']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='vehicle_type']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='default_co2']" position="attributes">
+                <attribute name="optional">hide</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="model_type"/>
+                <field name="year_from_str"/>
+                <field name="year_to_str"/>
+                <field name="volume_id"/>
+                <field name="default_fuel_type"/>
+                <field name="transmission"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

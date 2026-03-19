@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="test_task_product_product_form_autoparts" model="ir.ui.view">
+        <field name="name">test.task.product.product.form.autoparts</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_general']/field[@name='is_autoparts']" position="after">
+                <field name="is_autoparts" invisible="1"/>
+                <field name="ovoko_part_id"/>
+            </xpath>
+
+            <xpath expr="//page[@name='invoicing']" position="after">
+                <page string="Autoparts" name="autoparts" invisible="not is_autoparts" groups="add_car_to_product.group_user_car">
+                    <group>
+                        <group>
+                            <field name="for_all_models"/>
+                            <field name="oem"/>
+                        </group>
+                    </group>
+
+                    <separator string="Compatible Vehicles"/>
+                    <field name="compatible_vehicle_ids">
+                        <tree string="Compatible Vehicles" editable="bottom">
+                            <field name="brand_id" />
+                            <field name="name" string="Model"/>
+                            <field name="model_type"/>
+                            <field name="years_str"/>
+                            <field name="volume_id"/>
+                            <field name="default_fuel_type"/>
+                            <field name="transmission"/>
+                        </tree>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+</odoo>
